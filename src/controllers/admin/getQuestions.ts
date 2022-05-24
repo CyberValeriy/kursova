@@ -13,7 +13,7 @@ export const getQuestions = async (
     const data = await AdminService.getQuestions(new Types.ObjectId(testId));
     res.json({
       status: OK,
-      message: "Students fetched!",
+      message: "Questions fetched!",
       data,
     });
   } catch (err) {
