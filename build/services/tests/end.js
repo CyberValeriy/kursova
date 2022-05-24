@@ -44,27 +44,32 @@ var end = function (testId, points, studentId) { return __awaiter(void 0, void 0
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 4, , 5]);
+                _a.trys.push([0, 5, , 6]);
+                return [4, models_1.TestModel.exists({ _id: testId })];
+            case 1:
+                if (!(_a.sent())) {
+                    throw errors_1.ApiError.BadRequest("Test not exist!");
+                }
                 return [4, models_1.StudentModel.findByIdAndUpdate(studentId, {
                         $push: { tests: testId }
                     })];
-            case 1:
+            case 2:
                 _a.sent();
                 return [4, models_1.TestModel.findById(testId)];
-            case 2:
+            case 3:
                 test = _a.sent();
                 return [4, models_1.ResultModel.create({
                         student_id: studentId,
                         points: points,
                         title: test.title
                     })];
-            case 3:
+            case 4:
                 result = _a.sent();
                 return [2, result];
-            case 4:
+            case 5:
                 err_1 = _a.sent();
                 throw errors_1.ApiError.BadRequest("End test service errror!");
-            case 5: return [2];
+            case 6: return [2];
         }
     });
 }); };

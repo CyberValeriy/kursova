@@ -15,3 +15,4 @@ __exportStar(require("./group.model"), exports);
 __exportStar(require("./test.model"), exports);
 __exportStar(require("./question.model"), exports);
 __exportStar(require("./result.model"), exports);
+__exportStar(require("./admin.model"), exports);

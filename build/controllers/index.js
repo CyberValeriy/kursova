@@ -19,7 +19,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 exports.__esModule = true;
-exports.TestCTRL = exports.CommonCTRL = exports.AuthCTRL = void 0;
+exports.AdminCTRL = exports.TestCTRL = exports.CommonCTRL = exports.AuthCTRL = void 0;
 exports.AuthCTRL = __importStar(require("./auth"));
 exports.CommonCTRL = __importStar(require("./common"));
 exports.TestCTRL = __importStar(require("./tests"));
+exports.AdminCTRL = __importStar(require("./admin"));

@@ -9,6 +9,6 @@ var choiceSchema = new mongoose_1.Schema({
 var questionSchema = new mongoose_1.Schema({
     test_id: { type: mongoose_1.SchemaTypes.ObjectId, ref: "Test", required: true },
     title: { type: String, required: true },
-    choises: [choiceSchema]
+    choices: [choiceSchema]
 });
 exports.QuestionModel = (0, mongoose_1.model)("Question", questionSchema);

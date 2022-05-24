@@ -19,7 +19,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 exports.__esModule = true;
-exports.TestService = exports.CommonService = exports.AuthService = void 0;
+exports.AdminService = exports.TestService = exports.CommonService = exports.AuthService = void 0;
 exports.AuthService = __importStar(require("./auth"));
 exports.CommonService = __importStar(require("./common"));
 exports.TestService = __importStar(require("./tests"));
+exports.AdminService = __importStar(require("./admin"));

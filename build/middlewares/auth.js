@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 exports.__esModule = true;
-exports.auth = void 0;
+exports.authAdmin = exports.auth = void 0;
 var errors_1 = require("../errors");
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var models_1 = require("../database/models");
@@ -51,21 +51,21 @@ var auth = function (req, res, next) { return __awaiter(void 0, void 0, void 0, 
             case 0:
                 authHeader = req.get("Authorization");
                 if (!authHeader) {
-                    return [2, next()];
+                    return [2, next(errors_1.ApiError.UnauthorizedError("No auth header!"))];
                 }
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 3, , 4]);
                 token = authHeader.split(" ")[1];
                 if (!token)
-                    return [2, next(errors_1.ApiError.UnauthorizedError())];
+                    return [2, next(errors_1.ApiError.UnauthorizedError("No token!"))];
                 verifiedData = jsonwebtoken_1["default"].verify(token, config_1["default"].JWT.SECRET);
                 sub = verifiedData.sub;
                 return [4, models_1.StudentModel.findOne({ email: sub })];
             case 2:
                 student = _a.sent();
                 if (!student) {
-                    return [2, next(errors_1.ApiError.ForbiddenError())];
+                    return [2, next(errors_1.ApiError.ForbiddenError("Student not exist!"))];
                 }
                 req.student = student;
                 req.studentId = student._id;
@@ -80,3 +80,40 @@ var auth = function (req, res, next) { return __awaiter(void 0, void 0, void 0, 
     });
 }); };
 exports.auth = auth;
+var authAdmin = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var authHeader, token, verifiedData, sub, admin, err_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                authHeader = req.get("Authorization");
+                if (!authHeader) {
+                    return [2, next(errors_1.ApiError.UnauthorizedError("No auth header!"))];
+                }
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 3, , 4]);
+                token = authHeader.split(" ")[1];
+                if (!token)
+                    return [2, next(errors_1.ApiError.UnauthorizedError("No token!"))];
+                verifiedData = jsonwebtoken_1["default"].verify(token, config_1["default"].JWT.SECRET);
+                sub = verifiedData.sub;
+                return [4, models_1.AdminModel.findOne({ email: sub })];
+            case 2:
+                admin = _a.sent();
+                if (!admin) {
+                    return [2, next(errors_1.ApiError.ForbiddenError("Admin not exist!"))];
+                }
+                req.admin = admin;
+                req.admin = admin._id;
+                req["super"] = admin["super"];
+                next();
+                return [3, 4];
+            case 3:
+                err_2 = _a.sent();
+                next(err_2);
+                return [3, 4];
+            case 4: return [2];
+        }
+    });
+}); };
+exports.authAdmin = authAdmin;
