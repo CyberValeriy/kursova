@@ -1,10 +1,11 @@
 import cron from "cron";
-import { TestModel, QuestionModel } from "../database/models";
+import { TestModel, QuestionModel, StudentModel } from "../database/models";
 
-export const runCron = () => {
+export default () => {
   cron.job(
-    "",
+    "0 0 * * *",
     async () => {
+      console.log("SCHEDULED");
       const tests = await TestModel.find({
         endDate: new Date(new Date().setDate(new Date().getDate() - 1)),
       });
@@ -17,6 +18,10 @@ export const runCron = () => {
       }
       await TestModel.deleteMany({ _id: { $in: ids } });
       await QuestionModel.deleteMany({ test_id: { $in: ids } });
+      await StudentModel.updateMany(
+        { tests: { $in: ids } },
+        { $pull: { tests: ids } }
+      );
     },
     null,
     true
