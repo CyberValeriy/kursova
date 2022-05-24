@@ -4,6 +4,7 @@ export * from "./getStudents";
 export * from "./deleteStudent";
 
 export * from "./getTests";
+export * from "./createTest";
 export * from "./getQuestions";
 export * from "./deleteTest";
 

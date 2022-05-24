@@ -15,11 +15,13 @@ router.delete("student/:studentId", authAdmin, AdminCTRL.deleteStudent);
 router.get("/students", authAdmin, AdminCTRL.getStudents);
 
 //TESTS
+router.post("/test", authAdmin, AdminCTRL.createTest);
+
 router.get("/tests", authAdmin, AdminCTRL.getTests);
 
 router.get("/questions/:testId", authAdmin, AdminCTRL.getQuestions);
 
-router.get("test/:testId", authAdmin, AdminCTRL.deleteTest);
+router.delete("test/:testId", authAdmin, AdminCTRL.deleteTest);
 
 //SUPER
 router.post("/", authAdmin, isSuper, AdminCTRL.getAdmins);
