@@ -9,7 +9,7 @@ const choiceSchema = new Schema({
 const questionSchema = new Schema({
   test_id: { type: SchemaTypes.ObjectId, ref: "Test", required: true },
   title: { type: String, required: true },
-  choises: [choiceSchema],
+  choices: [choiceSchema],
 });
 
 export const QuestionModel = model<IQuestion>("Question", questionSchema);
