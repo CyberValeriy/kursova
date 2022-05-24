@@ -8,6 +8,9 @@ export const end = async (
   studentId: Types.ObjectId
 ) => {
   try {
+    if (!(await TestModel.exists({ _id: testId }))) {
+      throw ApiError.BadRequest("Test not exist!");
+    }
     await StudentModel.findByIdAndUpdate(studentId, {
       $push: { tests: testId },
     });

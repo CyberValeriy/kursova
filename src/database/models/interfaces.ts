@@ -37,3 +37,9 @@ export interface IResult extends Document {
   points: String;
   user_id: Types.ObjectId;
 }
+
+export interface IAdmin extends Document {
+  email: string;
+  password: string;
+  super: boolean;
+}
