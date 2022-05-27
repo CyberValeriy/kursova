@@ -31,7 +31,7 @@ export default {
   ],
 
   deleteStudent: [
-    param("studentId")
+    param("Id")
       .notEmpty()
       .isString()
       .isMongoId()
@@ -44,7 +44,7 @@ export default {
   ],
 
   deleteAdmin: [
-    param("adminId")
+    param("Id")
       .notEmpty()
       .isString()
       .isMongoId()
@@ -57,7 +57,7 @@ export default {
   ],
 
   deleteTest: [
-    param("testId")
+    param("Id")
       .notEmpty()
       .isString()
       .isMongoId()
@@ -70,7 +70,7 @@ export default {
   ],
 
   getQuestions: [
-    param("testId")
+    param("Id")
       .notEmpty()
       .isString()
       .customSanitizer(toObjectId)
