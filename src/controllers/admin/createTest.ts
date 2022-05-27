@@ -13,7 +13,7 @@ export const createTest = async (
 
     res.json({
       status: CREATED,
-      message: "Admin created!",
+      message: "Test created!",
       data,
     });
   } catch (err) {

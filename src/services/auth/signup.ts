@@ -1,4 +1,5 @@
-import { StudentModel } from "../../database/models";
+import { StudentModel, VerifyModel } from "../../database/models";
+import { ApiError } from "../../errors/error.custom";
 import { ERoles } from "../../consts/enums";
 import CONFIG from "../../config";
 import { Types } from "mongoose";
@@ -10,8 +11,15 @@ export const signup = async (
   email: string,
   username: string,
   password: string,
-  groupId: Types.ObjectId
+  groupId: Types.ObjectId,
+  code: string
 ) => {
+  const verify = await VerifyModel.findOne({ email });
+  if (!(await bcrypt.compare(code, verify.code))) {
+    throw ApiError.BadRequest("Invalid verification code!");
+  }
+  await VerifyModel.deleteOne({ email });
+
   const hashedPassword = await bcrypt.hash(password, 12);
   const student = await StudentModel.create({
     email,

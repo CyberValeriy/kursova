@@ -8,9 +8,9 @@ export const createAdmin = async (
   next: NextFunction
 ) => {
   try {
-    const { email, username, password, groupId } = req.body;
+    const { email, password, isSuper = false } = req.body;
 
-    const data = await AdminService.createAdmin(email, username);
+    const data = await AdminService.createAdmin(email, password, isSuper);
 
     res.json({
       status: CREATED,

@@ -8,4 +8,6 @@ router.post("/signup", AuthValid.signup, validHandler, AuthCTRL.signup);
 
 router.post("/login", AuthValid.login, validHandler, AuthCTRL.login);
 
+router.post("/verify", AuthValid.signup, validHandler, AuthCTRL.verify);
+
 export default router;

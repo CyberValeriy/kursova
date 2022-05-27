@@ -43,3 +43,8 @@ export interface IAdmin extends Document {
   password: string;
   super: boolean;
 }
+
+export interface IVerify extends Document {
+  email: string;
+  code: string;
+}

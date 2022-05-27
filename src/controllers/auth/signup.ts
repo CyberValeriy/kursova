@@ -9,9 +9,15 @@ export const signup = async (
   next: NextFunction
 ) => {
   try {
-    const { email, username, password, groupId } = req.body;
+    const { email, username, password, groupId, code } = req.body;
 
-    const data = await AuthService.signup(email, username, password, groupId);
+    const data = await AuthService.signup(
+      email,
+      username,
+      password,
+      groupId,
+      code
+    );
 
     res.json({
       status: CREATED,
