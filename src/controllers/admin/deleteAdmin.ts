@@ -1,16 +1,16 @@
 import { AdminService } from "../../services";
-import { Request, Response, NextFunction } from "express";
-import { Types } from "mongoose";
+import { Response, NextFunction } from "express";
+import { IParamsIdReq } from "./interfaces";
 import { OK } from "../../consts/statusCodes";
 
 export const deleteAdmin = async (
-  req: Request,
+  req: IParamsIdReq,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const { adminId } = req.params;
-    const data = await AdminService.deleteAdmin(new Types.ObjectId(adminId));
+    const { Id } = req.params;
+    const data = await AdminService.deleteAdmin(Id);
     res.json({
       status: OK,
       message: "Admin deleted!",

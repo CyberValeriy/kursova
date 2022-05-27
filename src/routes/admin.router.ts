@@ -1,32 +1,70 @@
 import { Router } from "express";
 import { AdminCTRL } from "../controllers";
-// import AuthValid from "../validators/auth.valid";
-// import { validHandler } from "../middlewares/validHandler";
+import AdminValid from "../validators/admin.valid";
+import { validHandler } from "../middlewares/validHandler";
 import { authAdmin } from "../middlewares/auth";
 import { isSuper } from "../middlewares/isSuper";
 const router = Router();
 
 //AUTH
-router.post("/login", AdminCTRL.login);
+router.post("/login", AdminValid.login, validHandler, AdminCTRL.login);
 
 //STUDENTS
-router.delete("/student/:studentId", authAdmin, AdminCTRL.deleteStudent);
+router.delete(
+  "/student/:Id",
+  authAdmin,
+  AdminValid.deleteStudent,
+  validHandler,
+  AdminCTRL.deleteStudent
+);
 
 router.get("/students", authAdmin, AdminCTRL.getStudents);
 
 //TESTS
-router.post("/test", authAdmin, AdminCTRL.createTest);
+router.post(
+  "/test",
+  authAdmin,
+  AdminValid.createTest,
+  validHandler,
+  AdminCTRL.createTest
+);
 
 router.get("/tests", authAdmin, AdminCTRL.getTests);
 
-router.get("/questions/:testId", authAdmin, AdminCTRL.getQuestions);
+router.get(
+  "/questions/:Id",
+  authAdmin,
+  AdminValid.getQuestions,
+  validHandler,
+  AdminCTRL.getQuestions
+);
 
-router.delete("/test/:testId", authAdmin, AdminCTRL.deleteTest);
+router.delete(
+  "/test/:Id",
+  authAdmin,
+  AdminValid.deleteTest,
+  validHandler,
+  AdminCTRL.deleteTest
+);
 
 //SUPER
-router.post("/", authAdmin, isSuper, AdminCTRL.createAdmin);
+router.post(
+  "/",
+  authAdmin,
+  isSuper,
+  AdminValid.createAdmin,
+  validHandler,
+  AdminCTRL.createAdmin
+);
 
-router.delete("/:adminId", authAdmin, isSuper, AdminCTRL.deleteAdmin);
+router.delete(
+  "/:Id",
+  authAdmin,
+  isSuper,
+  AdminValid.deleteAdmin,
+  validHandler,
+  AdminCTRL.deleteAdmin
+);
 
 router.get("/", authAdmin, isSuper, AdminCTRL.getAdmins);
 

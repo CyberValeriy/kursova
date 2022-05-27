@@ -1,18 +1,16 @@
 import { AdminService } from "../../services";
-import { Request, Response, NextFunction } from "express";
-import { Types } from "mongoose";
+import { Response, NextFunction } from "express";
+import { IParamsIdReq } from "./interfaces";
 import { OK } from "../../consts/statusCodes";
 
 export const deleteStudent = async (
-  req: Request,
+  req: IParamsIdReq,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const { studentId } = req.params;
-    const data = await AdminService.deleteStudent(
-      new Types.ObjectId(studentId)
-    );
+    const { Id } = req.params;
+    const data = await AdminService.deleteStudent(Id);
     res.json({
       status: OK,
       message: "Student deleted!",

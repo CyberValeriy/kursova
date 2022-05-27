@@ -1,16 +1,16 @@
 import { AdminService } from "../../services";
-import { Request, Response, NextFunction } from "express";
-import { Types } from "mongoose";
+import { Response, NextFunction } from "express";
+import { IParamsIdReq } from "./interfaces";
 import { OK } from "../../consts/statusCodes";
 
 export const getQuestions = async (
-  req: Request,
+  req: IParamsIdReq,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const { testId } = req.params;
-    const data = await AdminService.getQuestions(new Types.ObjectId(testId));
+    const { Id } = req.params;
+    const data = await AdminService.getQuestions(Id);
     res.json({
       status: OK,
       message: "Questions fetched!",
