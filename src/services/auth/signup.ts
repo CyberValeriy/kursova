@@ -19,7 +19,7 @@ export const signup = async (
     throw ApiError.BadRequest("Invalid verification code!");
   }
   await VerifyModel.deleteOne({ email });
-
+  console.log(password);
   const hashedPassword = await bcrypt.hash(password, 12);
   const student = await StudentModel.create({
     email,

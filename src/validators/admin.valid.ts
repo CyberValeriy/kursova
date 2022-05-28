@@ -102,9 +102,9 @@ export default {
   createTest: [
     body("test").notEmpty().isObject(),
     body("test.duration").notEmpty().isInt(),
-    body("test.startDate").notEmpty().isDate(),
-    body("test.endDate").notEmpty().isDate(),
-    body("test.groupId")
+    body("test.startDate").notEmpty().isString(),
+    body("test.endDate").notEmpty().isString(),
+    body("test.group_id")
       .notEmpty()
       .isString()
       .isMongoId()
@@ -117,7 +117,19 @@ export default {
           if (!el.choices || !el.title || el.choices.length == 0) {
             return Promise.reject("Invalid questions structure!");
           }
+          let status = false;
+          for (const choice of el.choices) {
+            if (choice.correct) {
+              status = true;
+            }
+          }
+          if (!status) {
+            return Promise.reject(
+              "Question must contain at least one correct answer!"
+            );
+          }
         }
+        return true;
       }),
   ],
 };
