@@ -1,4 +1,5 @@
-import { Schema, model, SchemaTypes } from "mongoose";
+import { Schema, model, SchemaTypes, PaginateModel } from "mongoose";
+import paginate from "mongoose-paginate-v2";
 import { IResult } from "./interfaces";
 
 const resultSchema = new Schema({
@@ -7,4 +8,9 @@ const resultSchema = new Schema({
   student_id: { type: SchemaTypes.ObjectId, ref: "Student" },
 });
 
-export const ResultModel = model<IResult>("Result", resultSchema);
+resultSchema.plugin(paginate);
+
+export const ResultModel = model<IResult, PaginateModel<IResult>>(
+  "Result",
+  resultSchema
+);

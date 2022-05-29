@@ -20,6 +20,11 @@ router.delete(
 
 router.get("/students", authAdmin, AdminCTRL.getStudents);
 
+router.get("/results", authAdmin, AdminCTRL.getResults);
+
+//GROUPS
+router.get("/group", authAdmin, AdminCTRL.createGroup);
+
 //TESTS
 router.post(
   "/test",

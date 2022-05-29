@@ -1,5 +1,10 @@
 import { body, param } from "express-validator";
-import { AdminModel, StudentModel, TestModel } from "../database/models";
+import {
+  AdminModel,
+  StudentModel,
+  TestModel,
+  GroupModel,
+} from "../database/models";
 import { IQuestion } from "../database/models/interfaces";
 import { Types } from "mongoose";
 
@@ -130,6 +135,17 @@ export default {
           }
         }
         return true;
+      }),
+  ],
+
+  createGroup: [
+    body("title")
+      .notEmpty()
+      .isString()
+      .custom(async (title) => {
+        if (await GroupModel.exists({ title })) {
+          return Promise.reject("Title already in use!");
+        }
       }),
   ],
 };

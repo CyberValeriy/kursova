@@ -5,3 +5,9 @@ export interface IParamsIdReq extends Request {
     Id: any;
   };
 }
+
+export interface ICreateGroupReq extends Request {
+  body: {
+    title: string;
+  };
+}
